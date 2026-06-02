@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ClinicMedicalReservationSystem.API/ClinicMedicalReservationSystem.API.csproj" />
+  <Project Path="ClinicMedicalReservationSystem.Application/ClinicMedicalReservationSystem.Application.csproj" />
+  <Project Path="ClinicMedicalReservationSystem.Domain/ClinicMedicalReservationSystem.Domain.csproj" />
+  <Project Path="ClinicMedicalReservationSystem.Infrastructure/ClinicMedicalReservationSystem.Infrastructure.csproj" />
+</Solution>
