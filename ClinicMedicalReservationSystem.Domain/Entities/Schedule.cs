@@ -18,7 +18,7 @@ namespace ClinicMedicalReservationSystem.Domain.Entities
 
         [Required]
         [ForeignKey("Doctor")]
-        public int DoctorId { get; set; }
+        public string DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
 
 

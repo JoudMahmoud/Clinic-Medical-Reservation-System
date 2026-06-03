@@ -1,4 +1,7 @@
 
+using ClinicMedicalReservationSystem.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
 namespace ClinicMedicalReservationSystem.Api;
 
 public class Program
@@ -14,6 +17,14 @@ public class Program
         builder.Services.AddOpenApi();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+
+        //configure DbContext
+        builder.Services.AddDbContext<ClinicMedicalReservationSystemDbcontext>(
+            options => options.UseLazyLoadingProxies()
+            .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
         var app = builder.Build();
 
         // This guarantees the file path /openapi/v1.json exists!
