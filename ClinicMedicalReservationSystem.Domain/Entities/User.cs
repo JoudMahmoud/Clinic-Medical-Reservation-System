@@ -10,6 +10,7 @@ namespace ClinicMedicalReservationSystem.Domain.Entities
     public class User:IdentityUser
     {
         public string? ImageUrl { get; set; }
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
 
     }
 }

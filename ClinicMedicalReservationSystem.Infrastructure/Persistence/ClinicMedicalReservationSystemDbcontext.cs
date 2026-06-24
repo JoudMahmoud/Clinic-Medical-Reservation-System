@@ -20,6 +20,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Persistence
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<ScheduleChangeRequest> ScheduleChanges { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

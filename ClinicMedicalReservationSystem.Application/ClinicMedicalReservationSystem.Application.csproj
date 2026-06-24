@@ -1,6 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.19.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ClinicMedicalReservationSystem.Domain\ClinicMedicalReservationSystem.Domain.csproj" />
   </ItemGroup>
 

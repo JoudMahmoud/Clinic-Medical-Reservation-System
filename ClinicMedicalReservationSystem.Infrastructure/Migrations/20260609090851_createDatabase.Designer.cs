@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ClinicMedicalReservationSystemDbcontext))]
-    [Migration("20260602112016_Create-database")]
-    partial class Createdatabase
+    [Migration("20260609090851_createDatabase")]
+    partial class createDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Createdatabase : Migration
+    public partial class createDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
