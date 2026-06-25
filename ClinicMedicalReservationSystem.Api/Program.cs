@@ -106,6 +106,8 @@ public class Program
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<IRefreshTokenRepo, RefreshTokenRepo>();
+        builder.Services.AddScoped<ISpecializationService, SpecializationService>();
+        builder.Services.AddScoped<ISpecializationRepo, SpecializationRepo>();
         #endregion
 
         var app = builder.Build();

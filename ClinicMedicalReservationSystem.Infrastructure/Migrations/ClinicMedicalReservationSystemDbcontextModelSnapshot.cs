@@ -37,7 +37,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 
                     b.HasIndex("DoctorsId");
 
-                    b.ToTable("BranchDoctor");
+                    b.ToTable("BranchDoctor", (string)null);
                 });
 
             modelBuilder.Entity("ClinicMedicalReservationSystem.Domain.Entities.Appointment", b =>
@@ -85,7 +85,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("ClinicMedicalReservationSystem.Domain.Entities.Branch", b =>
@@ -115,7 +115,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Branches");
+                    b.ToTable("Branches", (string)null);
                 });
 
             modelBuilder.Entity("ClinicMedicalReservationSystem.Domain.Entities.RefreshToken", b =>
@@ -147,7 +147,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens");
+                    b.ToTable("RefreshTokens", (string)null);
                 });
 
             modelBuilder.Entity("ClinicMedicalReservationSystem.Domain.Entities.Review", b =>
@@ -191,7 +191,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("ClinicMedicalReservationSystem.Domain.Entities.Schedule", b =>
@@ -225,7 +225,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("Schedules");
+                    b.ToTable("Schedules", (string)null);
                 });
 
             modelBuilder.Entity("ClinicMedicalReservationSystem.Domain.Entities.ScheduleChangeRequest", b =>
@@ -253,7 +253,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 
                     b.HasIndex("ScheduleId");
 
-                    b.ToTable("ScheduleChanges");
+                    b.ToTable("ScheduleChanges", (string)null);
                 });
 
             modelBuilder.Entity("ClinicMedicalReservationSystem.Domain.Entities.Specialization", b =>
@@ -270,7 +270,7 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Specializations");
+                    b.ToTable("Specializations", (string)null);
                 });
 
             modelBuilder.Entity("ClinicMedicalReservationSystem.Domain.Entities.User", b =>

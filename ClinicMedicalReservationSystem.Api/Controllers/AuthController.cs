@@ -45,7 +45,7 @@ namespace ClinicMedicalReservationSystem.API.Controllers
         {
             var result = await _authService.LoginAsync(userDto);
 
-            if(!result)
+            if(result==null)
                 return Unauthorized();
 
             return Ok(result);
