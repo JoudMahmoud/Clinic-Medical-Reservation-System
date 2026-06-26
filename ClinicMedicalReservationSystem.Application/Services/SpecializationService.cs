@@ -4,6 +4,7 @@ using ClinicMedicalReservationSystem.Application.DTOs;
 using ClinicMedicalReservationSystem.Application.Interfaces;
 using ClinicMedicalReservationSystem.Domain.Entities;
 using ClinicMedicalReservationSystem.Domain.Interfaces;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,54 @@ namespace ClinicMedicalReservationSystem.Application.Services
                 return Result.Failure("Failure to create Specializtion.");
 
             return Result.Success("Specialization Created.");
+        }
+
+        public async Task<SpecializationReviewDto?> GetByIdAsync(int id)
+        {
+            var exsitSpecialization = await _specializationRepo.GetByIdAsync(id);
+           
+            if(exsitSpecialization == null)
+                return null;
+            
+            var specializationDto = _mapper.Map<SpecializationReviewDto>(exsitSpecialization);
+            return specializationDto;
+        }
+
+        public async Task<SpecializationReviewDto?> UpdateAsync(int id, SpecializationDto dto)
+        {
+            var existSpecialization = await _specializationRepo.GetByIdAsync(id);
+            if (existSpecialization == null)
+                return null;
+
+            existSpecialization.Name = dto.Name;
+            _specializationRepo.Update(existSpecialization);
+
+            var specializationDto = _mapper.Map<SpecializationReviewDto>(existSpecialization);
+            var Saved = await _specializationRepo.SaveChangesAsync();
+            if (!Saved)
+                return null;
+
+            return specializationDto;
+        }
+
+        public async Task<Result> DeleteById(int id)
+        {
+            var existSpecialization = await _specializationRepo.GetByIdAsync(id);
+            if(existSpecialization == null)
+                return Result.Failure("Specialization not found.");
+
+            if (existSpecialization.Doctors.Any())
+            {
+                return Result.Failure("Cam't remove specialization because have Doctors.");
+            }
+
+            _specializationRepo.Delete(existSpecialization);
+
+            var saved = await _specializationRepo.SaveChangesAsync();
+            if (!saved)
+                return Result.Failure("Failer to delete specialization.");
+
+            return Result.Success("Specialization deleted successfuly.");
         }
         #endregion
     }

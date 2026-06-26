@@ -16,6 +16,7 @@ namespace ClinicMedicalReservationSystem.Application.Automapper
             //createMap<source, distination>
             CreateMap<RegisterUserDto, Patient>();
             CreateMap<SpecializationDto, Specialization>();
+            CreateMap<Specialization, SpecializationReviewDto>();
         }
 
     }

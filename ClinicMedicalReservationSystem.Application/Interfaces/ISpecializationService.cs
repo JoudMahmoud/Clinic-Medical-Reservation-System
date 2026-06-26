@@ -11,5 +11,8 @@ namespace ClinicMedicalReservationSystem.Application.Interfaces
     public interface ISpecializationService
     {
         Task<Result> AddAsync(SpecializationDto dto);
+        Task<SpecializationReviewDto?> GetByIdAsync(int id);
+        Task<SpecializationReviewDto> UpdateAsync(int id, SpecializationDto dto);
+        Task<Result> DeleteById(int id);
     }
 }

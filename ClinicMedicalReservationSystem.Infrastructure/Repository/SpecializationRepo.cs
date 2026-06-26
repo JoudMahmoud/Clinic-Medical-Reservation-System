@@ -27,7 +27,19 @@ namespace ClinicMedicalReservationSystem.Infrastructure.Repository
         {
             await _dbcontext.Specializations.AddAsync(specialization);
         }
+        public async Task<Specialization?> GetByIdAsync(int id)
+        {
+            return await _dbcontext.Specializations.FindAsync(id);
+        }
 
+        public void Update(Specialization specialization)
+        {
+            _dbcontext.Specializations.Update(specialization);
+        }
+        public void Delete(Specialization specialization)
+        {
+            _dbcontext.Specializations.Remove(specialization);
+        }
         public async Task<bool> SaveChangesAsync()
         {
             return await _dbcontext.SaveChangesAsync() > 0;

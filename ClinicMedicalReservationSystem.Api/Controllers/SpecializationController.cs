@@ -23,7 +23,7 @@ namespace ClinicMedicalReservationSystem.API.Controllers
 
         #region CRUD Operations 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromBody]SpecializationDto dto)
+        public async Task<ActionResult> AddAsync([FromBody]SpecializationDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -35,6 +35,38 @@ namespace ClinicMedicalReservationSystem.API.Controllers
 
             return Ok(new {message = result.Message});
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SpecializationReviewDto>> GetByIdAsync([FromRoute]int id)
+        {
+            var result = await _specializationService.GetByIdAsync(id);
+            if (result == null)
+                return NotFound("Specialization not found.");
+            return Ok(result);
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SpecializationReviewDto>> UpdateAsync([FromRoute] int id, [FromBody] SpecializationDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var specializationDto = await _specializationService.UpdateAsync(id, dto);
+
+            if (specializationDto==null)
+                return BadRequest(new { message = "Can't update specialization name."});
+
+            return Ok(specializationDto);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete([FromRoute] int id)
+        {
+            var result = await _specializationService.DeleteById(id);
+            if(!result.IsSuccess)
+                return BadRequest(new {message = result.Message});
+
+            return Ok(new { message = result.Message });
+        }
+
         #endregion
 
     }
