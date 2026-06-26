@@ -22,6 +22,12 @@ namespace ClinicMedicalReservationSystem.API.Controllers
         #endregion
 
         #region CRUD Operations 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<SpecializationReviewDto>>> GetAllAsync([FromQuery]string? search)
+        {
+            var specializationDtos = await _specializationService.GetAllAsync(search);
+            return Ok(specializationDtos);
+        }
         [HttpPost]
         public async Task<ActionResult> AddAsync([FromBody]SpecializationDto dto)
         {
@@ -39,8 +45,7 @@ namespace ClinicMedicalReservationSystem.API.Controllers
         public async Task<ActionResult<SpecializationReviewDto>> GetByIdAsync([FromRoute]int id)
         {
             var result = await _specializationService.GetByIdAsync(id);
-            if (result == null)
-                return NotFound("Specialization not found.");
+           
             return Ok(result);
         }
         [HttpPut("{id}")]

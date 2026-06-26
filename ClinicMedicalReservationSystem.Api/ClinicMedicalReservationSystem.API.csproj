@@ -21,9 +21,5 @@
 		<ProjectReference Include="..\ClinicMedicalReservationSystem.Application\ClinicMedicalReservationSystem.Application.csproj" />
 		<ProjectReference Include="..\ClinicMedicalReservationSystem.Infrastructure\ClinicMedicalReservationSystem.Infrastructure.csproj" />
 	</ItemGroup>
-	
-	<ItemGroup>
-		<Folder Include="wwwroot\DataSeed\" />
-	</ItemGroup>
 
 </Project>

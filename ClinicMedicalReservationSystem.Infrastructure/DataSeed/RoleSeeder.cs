@@ -19,12 +19,14 @@ namespace ClinicMedicalReservationSystem.Infrastructure.DataSeed
         public async Task seedRolesAsync()
         {
             var path = Path.Combine(
-                Directory.GetCurrentDirectory(), "wwwroot", "DataSeed", "Role.json");
+                Directory.GetCurrentDirectory(), 
+                "wwwroot", "DataSeed", "Role.json");
             if(!File.Exists(path)) 
                 return; 
 
             var json = await File.ReadAllTextAsync(path);
-            var roles = JsonSerializer.Deserialize<List<string>>(json);
+            var roles = 
+                JsonSerializer.Deserialize<List<string>>(json);
 
             if(roles is null) 
                 return;

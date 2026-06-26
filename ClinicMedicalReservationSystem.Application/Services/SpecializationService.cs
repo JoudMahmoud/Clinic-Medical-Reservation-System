@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ClinicMedicalReservationSystem.Application.Common;
 using ClinicMedicalReservationSystem.Application.DTOs;
+using ClinicMedicalReservationSystem.Application.Exceptions;
 using ClinicMedicalReservationSystem.Application.Interfaces;
 using ClinicMedicalReservationSystem.Domain.Entities;
 using ClinicMedicalReservationSystem.Domain.Interfaces;
@@ -30,8 +31,23 @@ namespace ClinicMedicalReservationSystem.Application.Services
         #endregion
 
         #region CRUD Operations 
+        public async Task<IEnumerable<SpecializationReviewDto>> GetAllAsync(string? search)
+        {
+            var specializations = await _specializationRepo.GetAllAsync(search);
+            
+            if(!specializations.Any()) 
+                return Enumerable.Empty<SpecializationReviewDto>();
+
+            var SpecializationDtos = _mapper.Map<IEnumerable<SpecializationReviewDto>>(specializations);
+            return SpecializationDtos;
+
+        }
         public async Task<Result> AddAsync(SpecializationDto dto)
         {
+            var existSpecialization = await _specializationRepo.GetByNameAsync(dto.Name);
+            if (existSpecialization != null)
+                return Result.Failure("Specialization is exist already.");
+
             var specialization =  _mapper.Map<Specialization>(dto);
             await _specializationRepo.AddAsync(specialization);
 
@@ -47,18 +63,20 @@ namespace ClinicMedicalReservationSystem.Application.Services
             var exsitSpecialization = await _specializationRepo.GetByIdAsync(id);
            
             if(exsitSpecialization == null)
-                return null;
-            
+                throw new NotFoundException("Specialization not found.");
+
             var specializationDto = _mapper.Map<SpecializationReviewDto>(exsitSpecialization);
             return specializationDto;
         }
 
-        public async Task<SpecializationReviewDto?> UpdateAsync(int id, SpecializationDto dto)
+        public async Task<SpecializationReviewDto> UpdateAsync(int id, SpecializationDto dto)
         {
             var existSpecialization = await _specializationRepo.GetByIdAsync(id);
             if (existSpecialization == null)
-                return null;
-
+                throw new NotFoundException("Specialization not found.");
+            var specializationWithSameName = await _specializationRepo.GetByNameAsync(dto.Name);
+            if (specializationWithSameName != null)
+                throw new NotFoundException("There is a specialization by the same name.");
             existSpecialization.Name = dto.Name;
             _specializationRepo.Update(existSpecialization);
 
@@ -72,13 +90,13 @@ namespace ClinicMedicalReservationSystem.Application.Services
 
         public async Task<Result> DeleteById(int id)
         {
-            var existSpecialization = await _specializationRepo.GetByIdAsync(id);
+            var existSpecialization = await _specializationRepo.GetByIdWithDoctorsAsync(id);
             if(existSpecialization == null)
-                return Result.Failure("Specialization not found.");
+                throw new NotFoundException("Specialization not found.");
 
             if (existSpecialization.Doctors.Any())
             {
-                return Result.Failure("Cam't remove specialization because have Doctors.");
+                return Result.Failure("Cam't delete pecialization because it has Doctors.");
             }
 
             _specializationRepo.Delete(existSpecialization);

@@ -10,6 +10,7 @@ namespace ClinicMedicalReservationSystem.Application.Interfaces
 {
     public interface ISpecializationService
     {
+        Task<IEnumerable<SpecializationReviewDto>> GetAllAsync(string? search);
         Task<Result> AddAsync(SpecializationDto dto);
         Task<SpecializationReviewDto?> GetByIdAsync(int id);
         Task<SpecializationReviewDto> UpdateAsync(int id, SpecializationDto dto);

@@ -101,6 +101,7 @@ public class Program
 
         //Register Data seeders
         builder.Services.AddScoped<RoleSeeder>();
+        builder.Services.AddScoped<SpecializationSeeder>();
 
 
         builder.Services.AddScoped<IAuthService, AuthService>();
@@ -129,6 +130,14 @@ public class Program
                 logger.LogError(ex, "An error occurred while seeding roles.");
             }
         }
+        using (var scope = app.Services.CreateScope())
+        {
+            var specializationSeeder =
+                scope.ServiceProvider.GetRequiredService<SpecializationSeeder>();
+
+            await specializationSeeder.SeedSpecializationsAsync();
+        }
+
 
         #endregion
         #region Middleware Pipeline
